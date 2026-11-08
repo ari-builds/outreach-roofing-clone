@@ -3,52 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+  <title>Outreach Roofing and Construction</title>
   <script>
-    // Single Page App redirect for GitHub Pages
-    // Preserves the path and query string when redirecting to index.html
-    (function() {
-      var path = window.location.pathname;
-      var query = window.location.search;
-      var hash = window.location.hash;
-      
-      // If we're on the 404 page (or any non-root path), redirect to index.html
-      // with the original path preserved in a query parameter
-      if (path !== '/' && path !== '/index.html') {
-        // Encode the path and query for the redirect
-        var redirectPath = encodeURIComponent(path + query + hash);
-        window.location.href = '/index.html?redirect=' + redirectPath;
-      }
+    /* GitHub Pages SPA fallback.
+       Pages has no rewrites, so unknown paths land here. We bounce to the real
+       index.html inside the repo subpath and hand it the intended route. */
+    (function () {
+      var BASE = '/outreach-roofing-clone';
+      var path = window.location.pathname || '/';
+      if (path.indexOf(BASE) === 0) { path = path.slice(BASE.length) || '/'; }
+      window.location.replace(
+        BASE + '/index.html?redirect=' +
+        encodeURIComponent(path + window.location.search + window.location.hash)
+      );
     })();
   </script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background: #FAFAFA;
-      color: #1C3D72;
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; margin: 0; background: #FAFAFA; color: #1C3D72;
     }
     .loader {
-      width: 40px;
-      height: 40px;
-      border: 3px solid #3A6ACB;
-      border-top-color: transparent;
-      border-radius: 50%;
+      width: 40px; height: 40px; border: 3px solid #3A6ACB;
+      border-top-color: transparent; border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
+  <noscript><meta http-equiv="refresh" content="0; url=/outreach-roofing-clone/"></noscript>
 </head>
 <body>
   <div class="loader" aria-label="Loading..."></div>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=/index.html">
-  </noscript>
 </body>
 </html>
